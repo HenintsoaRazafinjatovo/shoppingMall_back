@@ -1,4 +1,4 @@
-const Promotion = require('../../models/Promotion');
+const Promotion = require('../../models/PromotionModel');
 
 class PromotionService {
   constructor() {

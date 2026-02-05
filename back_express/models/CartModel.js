@@ -1,9 +1,9 @@
 const BaseModel = require('./BaseModel');
-const Cart = require('./Cart');
+const CartSchema = require('./Cart');
 
 class CartModel extends BaseModel {
   constructor() {
-    super(Cart);
+    super(CartSchema);
   }
 
   async createCart(cartData) {
@@ -21,4 +21,4 @@ class CartModel extends BaseModel {
   }
 }
 
-module.exports = new CartModel();
+module.exports = CartModel;

@@ -1,8 +1,8 @@
-const Cart = require('../../models/Cart');
+const CartModel = require('../../models/CartModel');
 
 class CartService {
   constructor() {
-    this.cartModel = new Cart();
+    this.cartModel = new CartModel();
   }
 
   async getCartByUser(userId) {

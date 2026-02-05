@@ -32,4 +32,4 @@ class ProductModel extends BaseModel {
   }
 }
 
-module.exports = new ProductModel();
+module.exports =  ProductModel;

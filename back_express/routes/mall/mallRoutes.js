@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
+
 // Controllers
 // const UserController = require('../controllers/app/userController');
-const BoutiqueController = require('../controllers/mall/BoutiqueController');
-const ProductController = require('../controllers/mall/productController');
-const CategoryController = require('../controllers/mall/categoryController');
-const CartController = require('../controllers/mall/cartController');
-const OrderController = require('../controllers/mall/orderController');
-const PromotionController = require('../controllers/mall/promotionController');
-const ReviewController = require('../controllers/mall/reviewController');
-const StockController = require('../controllers/mall/stockController');
+const BoutiqueController = require('../../controllers/mall/BoutiqueController');
+const ProductController = require('../../controllers/mall/ProductController');
+const CategoryController = require('../../controllers/mall/CategoryController');
+const CartController = require('../../controllers/mall/cartController');
+const OrderController = require('../../controllers/mall/orderController');
+const PromotionController = require('../../controllers/mall/promotionController');
+const ReviewController = require('../../controllers/mall/reviewController');
+const StockController = require('../../controllers/mall/stockController');
+
 
 // Instances
 // const userCtrl = new UserController();
@@ -50,6 +52,7 @@ router.put('/boutiques/:id/suspend', boutiqueCtrl.suspendBoutique);
 // PRODUCTS
 ///////////////////////////
 
+router.get('/products',productCtrl.getAllProducts);
 router.post('/products', productCtrl.createProduct);
 router.get('/products/search', productCtrl.searchProduct);
 router.get('/products/boutique/:boutiqueId', productCtrl.getProductsByBoutique);

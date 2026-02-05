@@ -1,30 +1,18 @@
 const BaseModel = require('./BaseModel');
-const Category = require('./Category');
+const CategorySchema = require('./Category');
 
 class CategoryModel extends BaseModel {
   constructor() {
-    super(Category);
+    super(CategorySchema);
   }
 
-  // Création d'une catégorie avec vérification unique
-  async createCategory(categoryData) {
-    const { name } = categoryData;
-
-    const existing = await this.findOne({ name });
+  async createCategory(data) {
+    const existing = await this.findOne({ name: data.name });
     if (existing) throw new Error('Category already exists');
 
-    return await this.create({ name });
-  }
-
-  // Mise à jour d'une catégorie
-  async updateCategory(categoryId, updates) {
-    return await this.updateById(categoryId, updates);
-  }
-
-  // Suppression soft
-  async deleteCategory(categoryId) {
-    return await this.softDelete(categoryId);
+    return await this.create(data);
   }
 }
 
-module.exports = new CategoryModel();
+module.exports = CategoryModel; // ⚠️ PAS new
+

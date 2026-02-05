@@ -1,10 +1,22 @@
-const BoutiqueService = require('../../services/mall/productService');
+const ProductService = require('../../services/mall/productService');
 
 
 class ProductController {
   constructor() {
     this.productService = new ProductService();
   }
+  getAllProducts = async (req, res) => {
+    try {
+      const products = await this.productService.getAllProducts();
+      res.status(200).json({
+        success: true,
+        count: products.length,
+        data: products
+      });
+    } catch (error) { 
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
 
   createProduct = async (req, res) => {
     try {

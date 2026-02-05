@@ -1,4 +1,4 @@
-const Product = require('../../models/Product');
+const Product = require('../../models/ProductModel');
 
 class ProductService {
   constructor() {
@@ -29,29 +29,20 @@ class ProductService {
     }
   }
   async searchProductByName(name) {
-  try {
-    return await this.productModel.findAll({ name: new RegExp(name, 'i') });
-  } catch (error) {
-    throw new Error(`Error searching product: ${error.message}`);
+    try {
+      return await this.productModel.findAll({ name: new RegExp(name, 'i') });
+    } catch (error) {
+      throw new Error(`Error searching product: ${error.message}`);
+    }
   }
-}
 
-async getProductsByCategory(categoryId) {
-  try {
-    return await this.productModel.findAll({ categoryId });
-  } catch (error) {
-    throw new Error(`Error fetching products by category: ${error.message}`);
+  async getAllProducts() {
+    try {
+      return await this.productModel.findAll();
+    } catch (error) {
+      throw new Error(`Error fetching all products: ${error.message}`);
+    }
   }
-}
-
-async getProductsByBoutique(boutiqueId) {
-  try {
-    return await this.productModel.findAll({ boutiqueId });
-  } catch (error) {
-    throw new Error(`Error fetching products by boutique: ${error.message}`);
-  }
-}
-
 }
 
 module.exports = ProductService;

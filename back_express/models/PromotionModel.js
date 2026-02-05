@@ -1,5 +1,3 @@
-
-
 const BaseModel = require('./BaseModel');
 const Promotion = require('./Promotion');
 
@@ -23,4 +21,4 @@ class PromotionModel extends BaseModel {
   }
 }
 
-module.exports = new PromotionModel();
+module.exports = PromotionModel;

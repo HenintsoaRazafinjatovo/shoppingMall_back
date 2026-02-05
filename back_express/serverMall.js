@@ -1,27 +1,27 @@
-// serverMall.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const mallRoutes = require('./routes/mall/mallRoutes');
 
 const app = express();
 
-// Middlewares
-app.use(cors()); // pour autoriser Postman ou frontend à accéder à l'API
-app.use(bodyParser.json()); // pour parser les JSON
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Routes
+// ✅ CONNEXION MONGODB ICI
+mongoose.connect('mongodb://127.0.0.1:27017/shopping_mall')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error(err));
+
 app.use('/api/mall', mallRoutes);
 
-// Test route simple
 app.get('/', (req, res) => {
   res.send('Server is running');
 });
 
-// Port
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

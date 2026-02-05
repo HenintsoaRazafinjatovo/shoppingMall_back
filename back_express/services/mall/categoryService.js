@@ -1,24 +1,16 @@
-const Category = require('../../models/Category');
+const CategoryModel = require('../../models/CategoryModel');
 
 class CategoryService {
   constructor() {
-    this.categoryModel = new Category();
+    this.categoryModel = new CategoryModel();
   }
 
   async createCategory(data) {
-    try {
-      return await this.categoryModel.create(data);
-    } catch (error) {
-      throw new Error(`Error creating category: ${error.message}`);
-    }
+    return await this.categoryModel.createCategory(data);
   }
 
   async getAllCategories() {
-    try {
-      return await this.categoryModel.findAll();
-    } catch (error) {
-      throw new Error(`Error fetching categories: ${error.message}`);
-    }
+    return await this.categoryModel.findAll();
   }
 }
 
