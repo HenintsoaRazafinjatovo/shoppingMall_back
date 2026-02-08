@@ -19,6 +19,10 @@ class StockModel extends BaseModel {
   async deleteStock(stockId) {
     return await this.softDelete(stockId);
   }
+  async findLowStock() {
+    return await this.findAll({ quantity: { $lte: this.model.schema.path('alertThreshold').defaultValue } });
+  }
+
 }
 
-module.exports = new StockModel();
+module.exports = StockModel;

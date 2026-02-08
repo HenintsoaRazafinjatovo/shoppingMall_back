@@ -1,8 +1,8 @@
-const Order = require('../../models/Order');
+const OrderModel = require('../../models/OrderModel');
 
 class OrderService {
   constructor() {
-    this.orderModel = new Order();
+    this.orderModel = new OrderModel();
   }
 
   async createOrder(orderData) {

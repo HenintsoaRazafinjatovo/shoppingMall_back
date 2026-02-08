@@ -7,7 +7,7 @@ class CartService {
 
   async getCartByUser(userId) {
     try {
-      return await this.cartModel.findByUserId(userId);
+      return await this.cartModel.getCartByUser(userId);
     } catch (error) {
       throw new Error(`Error fetching cart: ${error.message}`);
     }
@@ -33,14 +33,6 @@ class CartService {
     return await this.cartModel.addItem(userId, item);
   } catch (error) {
     throw new Error(`Error adding item to cart: ${error.message}`);
-  }
-}
-
-async getCartByUser(userId) {
-  try {
-    return await this.cartModel.findByUserId(userId);
-  } catch (error) {
-    throw new Error(`Error fetching cart: ${error.message}`);
   }
 }
 

@@ -19,6 +19,19 @@ class PromotionModel extends BaseModel {
   async deletePromotion(promoId) {
     return await this.softDelete(promoId);
   }
+  async findActive() {
+  return await this.model.aggregate([
+    {
+      $lookup: {
+        from: "products",           // nom réel de la collection Mongo
+        localField: "productIds",  // tableau dans Promotion
+        foreignField: "_id",       // id dans Product
+        as: "products"
+      }
+    }
+  ]);
+}
+
 }
 
 module.exports = PromotionModel;

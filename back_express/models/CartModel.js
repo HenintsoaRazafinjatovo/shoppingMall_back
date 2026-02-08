@@ -19,6 +19,31 @@ class CartModel extends BaseModel {
   async deleteCart(cartId) {
     return await this.softDelete(cartId);
   }
+  async getCartByUser(userId) {
+    return await this.findOne({ userId });
+  }
+  async addItem(userId, item) {
+  let cart = await this.findOne({ userId });
+
+  if (!cart) {
+    cart = await this.create({ userId, items: [item] });
+  } else {
+    cart.items.push(item);
+    await cart.save();
+  }
+
+  return cart;
 }
+
+async clear(userId) {
+  const cart = await this.findOne({ userId });
+  if (cart) {
+    cart.items = [];
+    await cart.save();
+  }
+  return cart;
+}
+}
+
 
 module.exports = CartModel;

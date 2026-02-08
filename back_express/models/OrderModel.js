@@ -21,4 +21,4 @@ class OrderModel extends BaseModel {
   }
 }
 
-module.exports = new OrderModel();
+module.exports = OrderModel;

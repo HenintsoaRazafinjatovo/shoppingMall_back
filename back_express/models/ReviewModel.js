@@ -21,4 +21,4 @@ class ReviewModel extends BaseModel {
   }
 }
 
-module.exports = new ReviewModel();
+module.exports = ReviewModel;
