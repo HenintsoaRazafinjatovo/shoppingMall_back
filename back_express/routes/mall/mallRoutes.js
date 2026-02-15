@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 // Controllers
-// const UserController = require('../controllers/app/userController');
+// const UserController = require('../../controllers/app/userController');
 const BoutiqueController = require('../../controllers/mall/BoutiqueController');
 const ProductController = require('../../controllers/mall/ProductController');
 const CategoryController = require('../../controllers/mall/CategoryController');
