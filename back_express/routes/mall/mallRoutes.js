@@ -65,7 +65,7 @@ router.get('/products/category/:categoryId', productCtrl.getProductsByCategory);
 router.post('/categories', categoryCtrl.createCategory);
 router.get('/categories', categoryCtrl.getAllCategories);
 
-///////////////////////////
+//////////////////////////
 // CART
 ///////////////////////////
 
