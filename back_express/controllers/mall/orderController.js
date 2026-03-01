@@ -1,4 +1,4 @@
-const OrderService = require('../../services/mall/orderService');
+const OrderService = require('../../services/mall/OrderService');
 
 class OrderController {
   constructor() {
@@ -16,6 +16,37 @@ class OrderController {
       });
     } catch (error) {
       res.status(400).json({ success: false, message: error.message });
+    }
+  };
+
+  getAllOrders = async (req, res) => {
+    try {
+      const orders = await this.orderService.getAllOrders();
+
+      res.status(200).json({
+        success: true,
+        count: orders.length,
+        data: orders
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  getOrderById = async (req, res) => {
+    try {
+      const order = await this.orderService.getOrderById(req.params.id);
+
+      if (!order) {
+        return res.status(404).json({ success: false, message: 'Order not found' });
+      }
+
+      res.status(200).json({
+        success: true,
+        data: order
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
     }
   };
 

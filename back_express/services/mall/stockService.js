@@ -1,4 +1,4 @@
-const Stock = require('../../models/StockModel');
+const StockModel = require('../../models/StockModel');
 
 class StockService {
   constructor() {

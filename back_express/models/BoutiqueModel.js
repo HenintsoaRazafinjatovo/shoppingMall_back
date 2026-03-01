@@ -13,6 +13,14 @@ class BoutiqueModel extends BaseModel {
   async searchByName(name) {
     return await this.findAll({ name: new RegExp(name, 'i') });
   }
+
+  async validate(id) {
+    return await this.updateById(id, { isValidated: true });
+  }
+
+  async suspend(id) {
+    return await this.updateById(id, { isValidated: false });
+  }
 }
 
 module.exports = BoutiqueModel;

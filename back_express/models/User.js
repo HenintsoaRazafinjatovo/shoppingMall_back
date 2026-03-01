@@ -7,7 +7,8 @@ const UserSchema = new mongoose.Schema({
   role: { type: String, required: true, enum: ["ADMIN_CENTRE", "USER", "MANAGER"] },
   phone: { type: String },
   isActive: { type: Boolean, default: true },
-  profilePicturePath: { type: String, default: '' } // ajouté si tu veux gérer une photo de profil
+  profilePicturePath: { type: String, default: '' },
+  boutiqueId: { type: mongoose.Schema.Types.ObjectId, ref: 'Boutique' } // pour les MANAGER
 }, {
   timestamps: true // crée automatiquement createdAt et updatedAt
 });

@@ -33,6 +33,21 @@ class BoutiqueController {
     }
   };
 
+  getBoutiqueById = async (req, res) => {
+    try {
+      const boutique = await this.boutiqueService.getBoutiqueById(req.params.id);
+      if (!boutique) {
+        return res.status(404).json({ success: false, message: 'Boutique not found' });
+      }
+      res.status(200).json({
+        success: true,
+        data: boutique
+      });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
   getValidatedBoutiques = async (req, res) => {
     try {
       const boutiques = await this.boutiqueService.getAllValidatedBoutiques();
@@ -87,6 +102,40 @@ class BoutiqueController {
       });
     } catch (error) {
       res.status(500).json({ success: false, message: error.message });
+    }
+  };
+
+  updateBoutique = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const boutique = await this.boutiqueService.updateBoutique(id, req.body);
+      
+      if (!boutique) {
+        return res.status(404).json({ success: false, message: 'Boutique not found' });
+      }
+      
+      res.status(200).json({
+        success: true,
+        message: 'Boutique updated successfully',
+        data: boutique
+      });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
+    }
+  };
+
+  deleteBoutique = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const result = await this.boutiqueService.deleteBoutique(id);
+      
+      res.status(200).json({
+        success: true,
+        message: 'Boutique deleted successfully',
+        data: result
+      });
+    } catch (error) {
+      res.status(400).json({ success: false, message: error.message });
     }
   };
 }

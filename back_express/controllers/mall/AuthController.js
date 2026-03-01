@@ -1,4 +1,4 @@
-const UserModel = require('../../models/UserModel');
+  const UserModel = require('../../models/UserModel');
 const { generateTokens, verifyRefreshToken } = require('../../utils/jwt');
 
 class AuthController {
@@ -29,9 +29,12 @@ class AuthController {
       res.json({
         ...tokens,
         user: {
+          _id: user._id,
           id: user._id,
           fullName: user.fullName,
-          role: user.role
+          email: user.email,
+          role: user.role,
+          boutiqueId: user.boutiqueId || null
         }
       });
 
@@ -62,13 +65,49 @@ class AuthController {
     }
   }
   async register(req, res) {
-  try {
-    const user = await UserModel.createUser(req.body);
-    res.status(201).json(user);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+    try {
+      const user = await UserModel.createUser(req.body);
+      
+      // Si c'est un MANAGER, créer automatiquement une boutique
+      let boutiqueId = null;
+      if (user.role === 'MANAGER') {
+        const Boutique = require('../../models/Boutique');
+        const boutique = await Boutique.create({
+          name: `Boutique de ${user.fullName}`,
+          description: '',
+          logo: '',
+          ownerId: user._id,
+          isValidated: false
+        });
+        boutiqueId = boutique._id;
+        // Mettre à jour l'utilisateur avec son boutiqueId
+        await UserModel.updateById(user._id, { boutiqueId: boutique._id });
+      }
+      
+      // Générer les tokens pour connexion automatique
+      const payload = {
+        id: user._id,
+        role: user.role,
+        email: user.email
+      };
+      const tokens = generateTokens(payload);
+
+      res.status(201).json({
+        success: true,
+        ...tokens,
+        user: {
+          _id: user._id,
+          id: user._id,
+          fullName: user.fullName,
+          email: user.email,
+          role: user.role,
+          boutiqueId: boutiqueId
+        }
+      });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
   }
-}
 
 
 }

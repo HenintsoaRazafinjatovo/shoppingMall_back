@@ -9,8 +9,11 @@ class CategoryModel extends BaseModel {
   async createCategory(data) {
     const existing = await this.findOne({ name: data.name });
     if (existing) throw new Error('Category already exists');
-
     return await this.create(data);
+  }
+
+  async getAllCategories() {
+    return await this.findAll();
   }
 }
 

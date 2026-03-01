@@ -1,4 +1,4 @@
-const ReviewService = require('../../services/mall/reviewService');
+const ReviewService = require('../../services/mall/ReviewService');
 
 class ReviewController {
   constructor() {

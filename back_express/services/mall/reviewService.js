@@ -1,4 +1,4 @@
-const Review = require('../../models/ReviewModel');
+const ReviewModel = require('../../models/ReviewModel');
 
 class ReviewService {
   constructor() {
